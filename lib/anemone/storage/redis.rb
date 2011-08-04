@@ -7,7 +7,7 @@ module Anemone
       MARSHAL_FIELDS = %w(links visited fetched)
 
       def initialize(opts = {})
-        @redis = ::Redis.new(opts)
+        @redis = opts[:redis] || ::Redis.new(opts)
         @key_prefix = opts[:key_prefix] || 'anemone'
         keys.each { |key| delete(key) }
       end
